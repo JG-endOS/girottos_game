@@ -29,7 +29,7 @@ static int ler_int(const char *prompt, int min, int max)
         printf("%s", prompt);
         resultado = scanf("%d", &valor);
 
-        // USUÁRIO FECHOU A ENTRADA 
+        // USUÁRIO FECHOU A ENTRADA
         if (resultado == EOF)
         {
             printf("\nEntrada encerrada. Saindo do jogo...\n");
@@ -77,7 +77,7 @@ static int perguntas_e_respostas()
     printf("O jogo consiste em 5 perguntas, tente acertar! ;)\n\n");
 
     // PERGUNTA 1
-    printf("PRIMEIRA PERGUNTA:\nQual o professor mais lindo do CESUPA? [A-D]\n");
+    printf("PRIMEIRA PERGUNTA:\nQual o professor mais lindo do CESUPA?\n");
     printf("\n[1] Pedro Girotto");
     printf("\n[2] Polyana Ribeiro");
     printf("\n[3] Ricardo Casseb");
@@ -97,7 +97,7 @@ static int perguntas_e_respostas()
     printf("\nVOCE ACERTOU !!\n\n");
 
     // PERGUNTA 2
-    printf("SEGUNDA PERGUNTA:\nQuanto vale esse trabalho? [A-D]\n");
+    printf("SEGUNDA PERGUNTA:\nQuanto vale esse trabalho?\n");
     printf("\n[1] 2");
     printf("\n[2] 0.5");
     printf("\n[3] 3");
@@ -117,7 +117,7 @@ static int perguntas_e_respostas()
     printf("\nVOCE ACERTOU !!\n\n");
 
     // PERGUNTA 3
-    printf("TERCEIRA PERGUNTA:\nQual vai ser o game do ano? [A-D]\n");
+    printf("TERCEIRA PERGUNTA:\nQual vai ser o game do ano?\n");
     printf("\n[1] Resident Evil: Requiem");
     printf("\n[2] Mineirinho 2");
     printf("\n[3] Girotto's Game");
@@ -137,7 +137,7 @@ static int perguntas_e_respostas()
     printf("\nVOCE ACERTOU !!\n\n");
 
     // PERGUNTA 4
-    printf("QUARTA PERGUNTA:\nQuanto eh 2 + 2? [A-D]\n");
+    printf("QUARTA PERGUNTA:\nQuanto eh 2 + 2?\n");
     printf("\n[1] -4");
     printf("\n[2] 0.19");
     printf("\n[3] 321");
@@ -157,7 +157,7 @@ static int perguntas_e_respostas()
     printf("\nVOCE ACERTOU !!\n\n");
 
     // PERGUNTA 5
-    printf("QUINTA PERGUNTA:\nQual a melhor my little poney? [A-D]\n");
+    printf("QUINTA PERGUNTA:\nQual a melhor my little poney?\n");
     printf("\n[1] Rainbow Dash");
     printf("\n[2] Apple Jack");
     printf("\n[3] Twilight Sparkle");
@@ -180,9 +180,9 @@ static int perguntas_e_respostas()
     printf("[S] Pressione '1'\n[N] Pressione '2'\n");
     int fim = ler_int("Sua escolha: ", 1, 2);
     if (fim == 1)
-            return 1; // reinicia o jogo
-        else
-            return 0; // volta ao menu
+        return 1; // reinicia o jogo
+    else
+        return 0; // volta ao menu
 }
 
 // COBRA NA CAIXA
@@ -218,9 +218,11 @@ static int cobra_na_caixa()
             return 0; // volta ao menu
     }
 
+    // sorteio de qual jogador começa
     const char *jogadores[2] = {nomes[escolha1], nomes[escolha2]};
     int sorteio = rand() % 2;
     const char *jogador_escolhido = jogadores[sorteio];
+    // pega sempre o valor contrário do que foi sorteado primeiro
     const char *jogador_resto = jogadores[1 - sorteio];
 
     int rodada = 1;
@@ -231,29 +233,23 @@ static int cobra_na_caixa()
     limpar_tela();
     printf("O primeiro a jogar sera: %s\n", jogador_escolhido);
 
+
+    // Randomização do botão e da cobra por reinicialização
+    int cobra = (rand() % 5) + 1;
+        int botao;
+        do {
+            botao = (rand() % 5) + 1;
+        } while (botao == cobra);
+
     while (jogo_rodando)
     {
-        int disponiveis[5];
-        int n_disponiveis = 0;
-        for (int i = 1; i <= 5; i++)
-            if (caixas_disponiveis[i])
-                disponiveis[n_disponiveis++] = i;
-
-        int sla_cobra = rand() % n_disponiveis;
-        int sla_botao;
-        do
-        {
-            sla_botao = rand() % n_disponiveis;
-        } while (sla_botao == sla_cobra);
-
-        int cobra = disponiveis[sla_cobra];
-        int botao = disponiveis[sla_botao];
 
         printf("\n====Rodada %d====\n\n", rodada++);
         for (int i = 1; i <= 5; i++)
-            if (caixas_disponiveis[i])
+            if (caixas_disponiveis[i]) {
                 printf("[CAIXA %d]\n", i);
-
+                //printf("%d %d", cobra, botao);
+            }
         int caixa_escolhida;
         while (1)
         {
