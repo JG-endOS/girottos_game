@@ -8,6 +8,6 @@ First semester college project made in C, it is a simple terminal based game wit
 
 ---
 
-### 👨‍💻️ Dev
-JG-endOS
+### 👨‍💻️ Dev's
+JG-endOS & P-Alan
 
