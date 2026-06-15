@@ -1,2 +1,2 @@
-# Trabalho-do-Girotto
-Terminal game made in C language that has 3 mini games
+# Girotto's Game
+First semester college project made in C, it is a simple terminal based game with 3 mini-games.
